@@ -1,0 +1,21 @@
+.text-filed {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: map-get($theme-colors, secondary-color);
+  text-transform: capitalize;
+  background-color: map-get($theme-colors, text-color);
+  border-radius: 5px;
+  width: 100%;
+  margin: 1rem 0;
+
+  &::placeholder {
+    font-size: 16px;
+    color: map-get($theme-colors, dark-orange-color);
+    text-transform: capitalize;
+  }
+}

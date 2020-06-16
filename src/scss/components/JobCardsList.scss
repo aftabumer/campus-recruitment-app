@@ -1,0 +1,15 @@
+.job-card-list-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  margin: 25px 0;
+
+  .job-card-list-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48%;
+  }
+}

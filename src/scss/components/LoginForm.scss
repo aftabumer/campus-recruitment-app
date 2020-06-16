@@ -1,0 +1,65 @@
+.login-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 10px;
+  margin: 2rem 0;
+  width: 100%;
+  height: 450px;
+
+  .login-form-left-sec {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 40%;
+    height: inherit;
+    background-color: map-get($theme-colors, light-orange-color);
+  }
+
+  .login-form-right-sec {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 60%;
+    height: inherit;
+    background-color: map-get($theme-colors, dark-orange-color);
+
+    .login-form-content {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      height: inherit;
+      width: 75%;
+
+      .login-form-text {
+        font-family: Gilroy-Medium;
+        text-transform: capitalize;
+        text-align: left;
+        font-size: 24px;
+        color: map-get($theme-colors, primary-color);
+        padding-bottom: 1rem;
+      }
+
+      .login-field {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+      .login-btn {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        padding-top: 1rem;
+      }
+    }
+  }
+}
+
+
+.active-roll{
+    background-color: map-get($theme-colors, dark-orange-color);
+}

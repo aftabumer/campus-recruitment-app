@@ -1,0 +1,12 @@
+@import "./settings/colors";
+
+body {
+  background-color: map-get($theme-colors, secondary-color);
+}
+
+$base-font-size: 12px;
+$base-line-height: 20px;
+
+$base-radius: 3px;
+
+$base-spacing-unit: $base-line-height;

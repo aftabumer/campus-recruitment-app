@@ -1,0 +1,24 @@
+.image-text-conatiner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+height: 200px;
+  width: 100%;
+  cursor: pointer;
+
+  &:hover {
+    background-color: map-get($theme-colors, dark-orange-color);
+  }
+
+  .image-icon {
+    width: 75px;
+    height: 75px;
+  }
+  .image-title {
+    font-size: 18px;
+    font-family: Gilroy-Medium;
+    text-transform: capitalize;
+    padding-top: 1rem;
+  }
+}

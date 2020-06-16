@@ -1,0 +1,61 @@
+.jd-card-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 10px;
+
+  &:hover {
+    box-shadow: 0 4px 20px map-get($theme-colors, text-color);
+  }
+
+  .jd-left-sec {
+    width: 25%;
+
+    .jd-icon {
+      background-size: contain;
+      background-position: left;
+      background-repeat: no-repeat;
+      height: 150px;
+    }
+  }
+
+  .jd-right-sec {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 70%;
+
+    .job-title {
+      font-size: 24px;
+      text-align: left;
+      overflow: hidden;
+      text-transform: capitalize;
+      color: map-get($theme-colors, primary-color);
+    }
+
+    .job-description {
+      font-size: 18px;
+      text-align: left;
+      margin: 10px 0;
+      height: 60px;
+      overflow: hidden;
+      color: map-get($theme-colors, primary-color);
+
+      &::first-letter {
+        text-transform: capitalize;
+      }
+    }
+
+    .btn-sec {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 60%;
+    }
+  }
+}

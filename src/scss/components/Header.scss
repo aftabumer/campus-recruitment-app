@@ -1,0 +1,54 @@
+.header-container {
+  box-shadow: 0 0px 20px rgba(0, 179, 136, 0.15);
+  background-color: map-get($theme-colors, primary-color);
+  width: 100%;
+  height: 70px;
+
+  .header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    height: inherit;
+
+    .logo-sec {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex: 1;
+
+      .logo-sec-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+
+        .main-logo {
+          width: 48px;
+          height: 48px;
+        }
+
+        .main-heading {
+          text-transform: capitalize;
+          color: map-get($theme-colors, text-color);
+          font-family: Gilroy-Bold;
+        }
+      }
+    }
+
+    .nav-sec {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      flex: 1;
+
+      .nav-sec-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 30%;
+      }
+    }
+  }
+}

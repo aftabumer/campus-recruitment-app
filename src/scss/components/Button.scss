@@ -1,0 +1,47 @@
+.login-btn {
+  border: none;
+  outline: none;
+  // padding: 10px 20px;
+  font-size: 18px;
+  color: map-get($theme-colors, light-orange-color);
+  border-radius: 50px;
+  background: transparent;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.sign-up-btn {
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  color: map-get($theme-colors, light-orange-color);
+  background-color: map-get($theme-colors, secondary-color);
+  border-radius: 50px;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.primary-btn {
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: map-get($theme-colors, light-orange-color);
+  color: map-get($theme-colors, primary-color);
+  border-radius: 10px;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.secondary-btn {
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: map-get($theme-colors, dark-orange-color);
+  color: map-get($theme-colors, primary-color);
+  border-radius: 10px;
+  cursor: pointer;
+  text-transform: capitalize;
+}

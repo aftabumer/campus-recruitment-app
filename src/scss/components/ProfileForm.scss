@@ -1,0 +1,64 @@
+.profile-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 10px;
+  margin: 2rem 0;
+
+  .profile-form-left-sec {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    width: 65%;
+    height: 600px;
+    background-color: map-get($theme-colors, dark-orange-color);
+
+    .profile-form-title {
+      font-family: Gilroy-Medium;
+      text-transform: capitalize;
+      text-align: left;
+      color: map-get($theme-colors, primary-color);
+    }
+
+    .profile-form-fields {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+
+      .profile-field {
+        display: flex;
+        width: 95%;
+
+        .text-field {
+          margin: 10px 0;
+        }
+      }
+    }
+
+    .profile-form-btn {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      width: 100%;
+      margin: 2rem;
+      margin-left: 0;
+    }
+  }
+
+  .profile-form-right-sec {
+    width: 35%;
+
+    .profile-form-bg {
+      background-image: url("./../../assets/img-icon/sign-up-bg.jpg");
+      background-position: center;
+      background-position-x: 45%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 600px;
+    }
+  }
+}
