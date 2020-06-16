@@ -11,29 +11,33 @@ import {
   IS_LOGGED_IN,
   IS_LOGGED_IN_FAILURE,
   IS_LOGGED_IN_SUCCESS,
+  SET_USER,
   // GET_USERS,
   // GET_USERS_FAILURE,
   // GET_USERS_SUCCESS,
-  // GET_USER_BY_ID,
-  // GET_USER_BY_ID_FAILURE,
-  // GET_USER_BY_ID_SUCCESS,
+  GET_USER_BY_ID,
+  GET_USER_BY_ID_FAILURE,
+  GET_USER_BY_ID_SUCCESS,
 } from "../constants";
 
 export class authAction {
   ////////////////////////  SIGNUP  ////////////////////
   static signup(payload) {
+    debugger;
     return {
       type: SIGNUP,
       payload,
     };
   }
   static signupSuccess(payload) {
+    debugger;
     return {
       type: SIGNUP_SUCCESS,
       payload,
     };
   }
   static signupFailure(error) {
+    debugger;
     return {
       type: SIGNUP_FAILURE,
       error,
@@ -43,6 +47,7 @@ export class authAction {
   /////////////LOGIN//////////////////////////
 
   static login(payload) {
+    debugger;
     return {
       type: LOGIN,
       payload,
@@ -50,6 +55,7 @@ export class authAction {
   }
 
   static loginSuccess(payload) {
+    debugger;
     return {
       type: LOGIN_SUCCESS,
       payload,
@@ -57,6 +63,7 @@ export class authAction {
   }
 
   static loginFailure(error) {
+    debugger;
     return {
       type: LOGIN_FAILURE,
       error,
@@ -65,18 +72,21 @@ export class authAction {
 
   ////////////////////////  LOGOUT  ////////////////////
   static logout(payload) {
+    debugger;
     return {
       type: LOGOUT,
       payload,
     };
   }
   static logoutSuccess(payload) {
+    debugger;
     return {
       type: LOGOUT_SUCCESS,
       payload,
     };
   }
   static logoutFailure(error) {
+    debugger;
     return {
       type: LOGOUT_FAILURE,
       error,
@@ -85,6 +95,7 @@ export class authAction {
 
   ///////////// isLoggin //////////////
   static isLoggedIn(payload) {
+    debugger;
     return {
       type: IS_LOGGED_IN,
       payload,
@@ -92,6 +103,7 @@ export class authAction {
   }
 
   static isLoggedInSuccess(payload) {
+    debugger;
     return {
       type: IS_LOGGED_IN_SUCCESS,
       payload,
@@ -99,9 +111,18 @@ export class authAction {
   }
 
   static isLoggedInFailure(error) {
+    debugger;
     return {
       type: IS_LOGGED_IN_FAILURE,
       error,
+    };
+  }
+
+  static setUser(payload) {
+    debugger;
+    return {
+      type: SET_USER,
+      payload,
     };
   }
 
@@ -124,22 +145,25 @@ export class authAction {
   //   };
   // }
 
-  // static getUserById(payload) {
-  //   return {
-  //     type: GET_USER_BY_ID,
-  //     payload,
-  //   };
-  // }
-  // static getUserByIdSuccess(payload) {
-  //   return {
-  //     type: GET_USER_BY_ID_SUCCESS,
-  //     payload,
-  //   };
-  // }
-  // static getUserByIdFailure(error) {
-  //   return {
-  //     type: GET_USER_BY_ID_FAILURE,
-  //     error,
-  //   };
-  // }
+  static getUserById(payload) {
+    debugger;
+    return {
+      type: GET_USER_BY_ID,
+      payload,
+    };
+  }
+  static getUserByIdSuccess(payload) {
+    debugger;
+    return {
+      type: GET_USER_BY_ID_SUCCESS,
+      payload,
+    };
+  }
+  static getUserByIdFailure(error) {
+    debugger;
+    return {
+      type: GET_USER_BY_ID_FAILURE,
+      error,
+    };
+  }
 }

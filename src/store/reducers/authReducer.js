@@ -11,12 +11,13 @@ import {
   LOGOUT,
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE,
+  SET_USER,
   // GET_USERS,
   // GET_USERS_FAILURE,
   // GET_USERS_SUCCESS,
-  // GET_USER_BY_ID,
-  // GET_USER_BY_ID_SUCCESS,
-  // GET_USER_BY_ID_FAILURE,
+  GET_USER_BY_ID,
+  GET_USER_BY_ID_SUCCESS,
+  GET_USER_BY_ID_FAILURE,
 } from "../constants";
 
 const initialState = {
@@ -38,15 +39,17 @@ const initialState = {
   // getUsersLoader: false,
   // getUsersError: null,
 
-  // getUserById: null,
-  // getUserByIdLoader: false,
-  // getUserByIdError: null,
+  getUserById: null,
+  getUserByIdLoader: false,
+  getUserByIdError: null,
 };
 
 export default function authReducer(state = initialState, action) {
   switch (action.type) {
     ////////////////////////// SIGNUP /////////////////////
     case SIGNUP:
+      console.log(action.payload);
+      debugger;
       return {
         ...state,
         signup: null,
@@ -54,6 +57,7 @@ export default function authReducer(state = initialState, action) {
         signupError: null,
       };
     case SIGNUP_SUCCESS:
+      debugger;
       return {
         ...state,
         signup: action.payload,
@@ -61,6 +65,7 @@ export default function authReducer(state = initialState, action) {
         signupError: null,
       };
     case SIGNUP_FAILURE:
+      debugger;
       return {
         ...state,
         signup: null,
@@ -70,6 +75,7 @@ export default function authReducer(state = initialState, action) {
 
     ////////////////////////// IS LOGGED IN /////////////////////
     case IS_LOGGED_IN:
+      debugger;
       return {
         ...state,
         isLoggedIn: null,
@@ -77,6 +83,7 @@ export default function authReducer(state = initialState, action) {
         isLoggedInError: null,
       };
     case IS_LOGGED_IN_SUCCESS:
+      debugger;
       return {
         ...state,
         user: action.payload,
@@ -85,6 +92,7 @@ export default function authReducer(state = initialState, action) {
         isLoggedInError: null,
       };
     case IS_LOGGED_IN_FAILURE:
+      debugger;
       return {
         ...state,
         user: null,
@@ -95,6 +103,7 @@ export default function authReducer(state = initialState, action) {
 
     ////////////////////// LOGIN /////////////////////
     case LOGIN:
+      debugger
       return {
         ...state,
         login: null,
@@ -102,6 +111,7 @@ export default function authReducer(state = initialState, action) {
         loginError: null,
       };
     case LOGIN_SUCCESS:
+      debugger
       return {
         ...state,
         login: action.payload,
@@ -109,6 +119,7 @@ export default function authReducer(state = initialState, action) {
         loginError: null,
       };
     case LOGIN_FAILURE:
+      debugger
       return {
         ...state,
         login: null,
@@ -116,9 +127,40 @@ export default function authReducer(state = initialState, action) {
         loginError: action.error,
       };
 
+    /////////////
+    case LOGOUT:
+      debugger;
+      return {
+        ...state,
+        user: null,
+        authLoader: true,
+        authError: null,
+        isLoggedIn: false,
+      };
+
     case LOGOUT_SUCCESS:
-      state = initialState;
-      return state;
+      debugger;
+      return {
+        ...state,
+        initialState,
+      };
+
+    case LOGOUT_FAILURE:
+      debugger;
+      return {
+        ...state,
+        user: null,
+        authLoader: false,
+        authError: null,
+        isLoggedIn: false,
+      };
+
+    case SET_USER:
+      debugger;
+      return {
+        ...state,
+        user: action.payload,
+      };
 
     // //////////////////////////////GET_USERS//////////////
 
@@ -146,31 +188,34 @@ export default function authReducer(state = initialState, action) {
     //     getUsersError: action.error,
     //   };
 
-    // //////////////////////////////GET_USER_BY_ID//////////////
+    //////////////////////////////GET_USER_BY_ID//////////////
 
-    // case GET_USER_BY_ID:
-    //   return {
-    //     ...state,
-    //     getUserById: null,
-    //     getUserByIdLoader: true,
-    //     getUserByIdError: null,
-    //   };
-    // case GET_USER_BY_ID_SUCCESS:
-    //   return {
-    //     ...state,
-    //     user: action.payload,
-    //     getUserById: action.payload,
-    //     getUserByIdLoader: false,
-    //     getUserByIdError: null,
-    //   };
-    // case GET_USER_BY_ID_FAILURE:
-    //   return {
-    //     ...state,
+    case GET_USER_BY_ID:
+      debugger;
+      return {
+        ...state,
+        getUserById: null,
+        getUserByIdLoader: true,
+        getUserByIdError: null,
+      };
+    case GET_USER_BY_ID_SUCCESS:
+      debugger;
+      return {
+        ...state,
+        user: action.payload,
+        getUserById: action.payload,
+        getUserByIdLoader: false,
+        getUserByIdError: null,
+      };
+    case GET_USER_BY_ID_FAILURE:
+      debugger;
+      return {
+        ...state,
 
-    //     getUserById: null,
-    //     getUserByIdLoader: false,
-    //     getUserByIdError: action.error,
-    //   };
+        getUserById: null,
+        getUserByIdLoader: false,
+        getUserByIdError: action.error,
+      };
 
     default:
       return state;

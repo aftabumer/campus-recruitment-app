@@ -1,28 +1,39 @@
-import { Observable } from "rxjs/Rx";
-import { authAction } from "../action/index";
-import { HttpService } from "../../services/http";
-import PATH from "./../../config/path";
 import {
   SIGNUP,
   LOGIN,
   IS_LOGGED_IN,
   LOGOUT,
   // GET_USERS,
-  // GET_USER_BY_ID,
+  GET_USER_BY_ID,
 } from "../constants";
-import clientConfig from "./../../config/firebaseClientConfig";
-import firebase from "firebase";
+import { Observable } from "rxjs/Rx";
+import { authAction } from "../action/index";
+import auth, { db } from "../../config/firebaseClientConfig";
 
 export default class authEpic {
   static signup = (action$) =>
     action$.ofType(SIGNUP).switchMap(({ payload }) => {
-      return HttpService.post(PATH.SINGUP, payload)
-        .switchMap(({ response }) => {
-          if (response.status === 200) {
-            return Observable.of(authAction.signupSuccess(response.data));
-          } else {
+      debugger;
+      console.log(payload);
+      return Observable.fromPromise(
+        auth.createUserWithEmailAndPassword(payload.email, payload.password)
+      )
+        .switchMap((response) => {
+          payload["uid"] = response.user.uid;
+          response.user.updateProfile({
+            displayName: payload.firstName + " " + payload.lastName,
+          });
+          if (response.type && response.type === "SIGNUP_FAILURE") {
             return Observable.of(authAction.signupFailure(response.error));
+          } else {
+            return Observable.fromPromise(
+              db.collection("users").doc(response.user.uid).set(payload)
+            );
           }
+        })
+        .switchMap((response) => {
+          console.log(response);
+          return Observable.of(authAction.signupSuccess(payload));
         })
         .catch((err) => {
           return Observable.of(
@@ -31,127 +42,33 @@ export default class authEpic {
         });
     });
 
-  static login = (action$) =>
-    action$.ofType(LOGIN).switchMap(({ payload }) => {
-      const { email, password, isRememberMe } = payload;
-
-      if (isRememberMe) {
-        return Observable.fromPromise(
-          clientConfig.auth().signInWithEmailAndPassword(email, password)
-        )
-          .switchMap(({ user }) => {
-            if (user["emailVerified"]) {
-              return Observable.of(
-                authAction.loginSuccess({ user }),
-                authAction.isLoggedIn()
-              );
-            } else {
-              return Observable.of(
-                authAction.loginFailure({
-                  message: `You Email address is not verified!`,
-                })
-              );
-            }
-          })
-          .catch((error) => {
-            return Observable.of(
-              authAction.loginFailure({ message: error.message })
-            );
-          });
-      } else {
-        return Observable.fromPromise(
-          firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
-        )
-
-          .switchMap((_) => {
-            return Observable.fromPromise(
-              clientConfig.auth().signInWithEmailAndPassword(email, password)
-            ).switchMap(({ user }) => {
-              if (user["emailVerified"]) {
-                return Observable.of(
-                  authAction.loginSuccess({ user }),
-                  authAction.isLoggedIn()
-                );
-              } else {
-                return Observable.of(
-                  authAction.loginFailure({
-                    message: `You Email address is not verified!`,
-                  })
-                );
-              }
-            });
-          })
-          .catch((error) => {
-            return Observable.of(
-              authAction.loginFailure({ message: error.message })
-            );
-          });
-      }
-    });
-
   static isLoggedIn = (action$) =>
     action$.ofType(IS_LOGGED_IN).switchMap((_) => {
-      var data = {};
       return Observable.fromPromise(
         new Promise((resolve, reject) =>
-          clientConfig
-            .auth()
-            .onAuthStateChanged((user) => (user ? resolve(user) : reject()))
+          auth.onAuthStateChanged((user) => (user ? resolve(user) : reject()))
         )
       )
-        .switchMap((user) => {
-          if (user["emailVerified"]) {
-            //  clientConfig.firestore().collection("users").doc(user.uid).get(),
-            // clientConfig
-            //   .firestore()
-            //   .collection("users")
-            //   .doc(user.uid)
-            //   .onSnapshot(function (doc) {
-            //     var source = doc.metadata.hasPendingWrites
-            //       ? "Local"
-            //       : "Server";
-            //     console.log(source, " data: ", doc.data());
-            //   })
-
-            // .switchMap((doc) => {
-            //   debugger;
-            //   data = { ...doc.data(), id: doc.id };
-            //   return Observable.of(authAction.isLoggedInSuccess(data));
-            // })
-
-            // .catch((error) => {
-            //   return Observable.of(
-            //     authAction.logout(),
-            //     authAction.isLoggedInFailure({
-            //       message: "unable to fethch user data",
-            //     })
-            //   );
-            // });
-            return Observable.of(
-              authAction.getUserById({ userId: user.uid }),
-              authAction.isLoggedInSuccess(user)
-            );
+        .switchMap((response) => {
+          if (response.type && response.type === "IS_LOGGED_IN_FAILURE") {
+            return Observable.of(authAction.isLoggedInFailure(response));
           } else {
             return Observable.of(
-              authAction.isLoggedInFailure({
-                message: "User email address is not verified",
-              }),
-              authAction.logout()
+              authAction.isLoggedInSuccess(response),
+              authAction.getUserById({ uid: response.uid })
             );
           }
         })
         .catch((error) => {
           return Observable.of(
-            authAction.isLoggedInFailure({
-              message: "User is not authenticated",
-            })
+            authAction.isLoggedInFailure({ message: "No User is Logged In" })
           );
         });
     });
 
   static logout = (action$) =>
     action$.ofType(LOGOUT).switchMap((_) => {
-      return Observable.fromPromise(clientConfig.auth().signOut())
+      return Observable.fromPromise(auth.signOut())
         .switchMap((response) => {
           return Observable.of(
             authAction.logoutSuccess(response),
@@ -162,6 +79,32 @@ export default class authEpic {
           return Observable.of(
             authAction.logoutFailure({ message: "Error in Signout" })
           );
+        });
+    });
+
+  static login = (action$) =>
+    action$.ofType(LOGIN).switchMap(({ payload }) => {
+      debugger;
+      const { email, password } = payload;
+      return Observable.fromPromise(
+        auth.signInWithEmailAndPassword(email, password)
+      )
+        .switchMap((response) => {
+          debugger;
+          if (response.type && response.type === "LOGIN_FAILURE") {
+            return Observable.of(authAction.loginFailure(response.error));
+          } else {
+            debugger;
+            return Observable.of(
+              authAction.loginSuccess(response),
+              authAction.isLoggedIn(),
+              authAction.getUserById({ uid: response.user.uid })
+            );
+          }
+        })
+        .catch((err) => {
+          debugger;
+          return Observable.of(authAction.loginFailure({ error: err.message }));
         });
     });
 
@@ -190,121 +133,20 @@ export default class authEpic {
   //       });
   //   });
 
-  // static assignUserRole = (action$) =>
-  //   action$.ofType(ASSIGN_USER_ROLE).switchMap(({ payload }) => {
-  //     const { userId, operation } = payload;
-
-  //     if (operation === "invokeAdmin") {
-  //       return Observable.fromPromise(
-  //         clientConfig
-  //           .firestore()
-  //           .collection("users")
-  //           .doc(userId)
-  //           .update({
-  //             roles: firebase.firestore.FieldValue.arrayUnion("ADMIN"),
-  //           })
-  //       )
-  //         .switchMap(() => {
-  //           return Observable.of(
-  //             authAction.assignUserRoleSuccess({
-  //               message: "Admin role assigned",
-  //             }),
-  //             authAction.getUsers()
-  //           );
-  //         })
-  //         .catch((error) => {
-  //           return Observable.of(
-  //             authAction.getUsersFailure({ message: error.message })
-  //           );
-  //         });
-  //     } else if (operation === "revokeAdmin") {
-  //       return Observable.fromPromise(
-  //         clientConfig
-  //           .firestore()
-  //           .collection("users")
-  //           .doc(userId)
-  //           .update({
-  //             roles: firebase.firestore.FieldValue.arrayRemove("ADMIN"),
-  //           })
-  //       )
-  //         .switchMap(() => {
-  //           return Observable.of(
-  //             authAction.assignUserRoleSuccess({
-  //               message: "Admin role revoked",
-  //             }),
-  //             authAction.getUsers()
-  //           );
-  //         })
-  //         .catch((error) => {
-  //           return Observable.of(
-  //             authAction.getUsersFailure({ message: error.message })
-  //           );
-  //         });
-  //     } else if (operation === "invokeProfessional") {
-  //       return Observable.fromPromise(
-  //         clientConfig
-  //           .firestore()
-  //           .collection("users")
-  //           .doc(userId)
-  //           .update({
-  //             roles: firebase.firestore.FieldValue.arrayUnion("PROFESSIONAL"),
-  //           })
-  //       )
-  //         .switchMap(() => {
-  //           return Observable.of(
-  //             authAction.assignUserRoleSuccess({
-  //               message: "Professional role assigned",
-  //             }),
-  //             authAction.getUsers()
-  //           );
-  //         })
-  //         .catch((error) => {
-  //           return Observable.of(
-  //             authAction.getUsersFailure({ message: error.message })
-  //           );
-  //         });
-  //     } else if (operation === "revokeProfessional") {
-  //       return Observable.fromPromise(
-  //         clientConfig
-  //           .firestore()
-  //           .collection("users")
-  //           .doc(userId)
-  //           .update({
-  //             roles: firebase.firestore.FieldValue.arrayRemove("PROFESSIONAL"),
-  //           })
-  //       )
-  //         .switchMap(() => {
-  //           return Observable.of(
-  //             authAction.assignUserRoleSuccess({
-  //               message: "Professional role revoked",
-  //             }),
-  //             authAction.getUsers()
-  //           );
-  //         })
-  //         .catch((error) => {
-  //           return Observable.of(
-  //             authAction.getUsersFailure({ message: error.message })
-  //           );
-  //         });
-  //     }
-  //   });
-
-  // static getUserById = (action$) =>
-  //   action$.ofType(GET_USER_BY_ID).switchMap(({ payload }) => {
-  //     const { userId } = payload;
-
-  //     return Observable.fromPromise(
-  //       clientConfig.firestore().collection("users").doc(userId).get()
-  //     )
-  //       .switchMap((doc) => {
-  //         const data = { ...doc.data(), id: doc.id };
-
-  //         return Observable.of(authAction.getUserByIdSuccess(data));
-  //       })
-  //       .catch((error) => {
-  //         return Observable.of(
-  //           authAction.getUserByIdFailure({ message: error.message })
-  //         );
-  //       });
-  //   });
+  static getUserById = (action$) =>
+    action$.ofType(GET_USER_BY_ID).switchMap(({ payload }) => {
+      const { uid } = payload;
+      debugger;
+      return Observable.fromPromise(db.collection("users").doc(uid).get())
+        .switchMap((doc) => {
+          debugger;
+          const data = { ...doc.data(), id: doc.id };
+          return Observable.of(authAction.getUserByIdSuccess(data));
+        })
+        .catch((error) => {
+          return Observable.of(
+            authAction.getUserByIdFailure({ message: error.message })
+          );
+        });
+    });
 }

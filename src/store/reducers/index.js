@@ -4,7 +4,7 @@ import jobReducer from "./jobReducer";
 
 const rootReducer = combineReducers({
   authReducer,
-  jobReducer,
+  // jobReducer,
 });
 
 export default rootReducer;

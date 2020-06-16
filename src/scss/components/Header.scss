@@ -45,9 +45,17 @@
 
       .nav-sec-container {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
-        width: 30%;
+        width: 100%;
+
+        .display-user-name {
+          text-transform: capitalize;
+          color: map-get($theme-colors, text-color);
+          font-family: Gilroy-Bold;
+          font-size: 18px;
+          padding: 0 1rem;
+        }
       }
     }
   }
