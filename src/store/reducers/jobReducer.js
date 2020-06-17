@@ -11,6 +11,9 @@ import {
   SET_UP_STUDENT_PROFILE,
   SET_UP_STUDENT_PROFILE_FAILURE,
   SET_UP_STUDENT_PROFILE_SUCCESS,
+  SET_UP_COMPANY_PROFILE,
+  SET_UP_COMPANY_PROFILE_FAILURE,
+  SET_UP_COMPANY_PROFILE_SUCCESS,
 } from "../constants";
 
 const initialState = {
@@ -35,6 +38,7 @@ export default function jobReducer(state = initialState, action) {
   switch (action.type) {
     ////////////////////////// ADD DETAIL /////////////////////////
     case ADD_JOB:
+      debugger;
       return {
         ...state,
         addCategory: null,
@@ -42,6 +46,7 @@ export default function jobReducer(state = initialState, action) {
         addCategoryError: null,
       };
     case ADD_JOB_SUCCESS:
+      debugger;
       return {
         ...state,
         addCategory: action.payload,
@@ -49,6 +54,7 @@ export default function jobReducer(state = initialState, action) {
         addCategoryError: null,
       };
     case ADD_JOB_FAILURE:
+      debugger;
       return {
         ...state,
         addCategory: null,
@@ -103,7 +109,9 @@ export default function jobReducer(state = initialState, action) {
       };
 
     //////////////////////////SET_UP_STUDENT_PROFILE/////////////////////////
-    case SET_UP_STUDENT_PROFILE:  
+    case SET_UP_STUDENT_PROFILE:
+      console.log(action.payload);
+      debugger;
       return {
         ...state,
         setUpStudentProfile: null,
@@ -111,6 +119,7 @@ export default function jobReducer(state = initialState, action) {
         setUpStudentProfileError: null,
       };
     case SET_UP_STUDENT_PROFILE_SUCCESS:
+      debugger;
       return {
         ...state,
         setUpStudentProfile: action.payload,
@@ -118,11 +127,39 @@ export default function jobReducer(state = initialState, action) {
         setUpStudentProfileError: null,
       };
     case SET_UP_STUDENT_PROFILE_FAILURE:
+      debugger;
       return {
         ...state,
         setUpStudentProfile: null,
         setUpStudentProfileLoader: false,
         setUpStudentProfileError: action.error,
+      };
+
+    //////////////////////////SET_UP_COMPANY_PROFILE/////////////////////////
+    case SET_UP_COMPANY_PROFILE:
+      console.log(action.payload);
+      debugger;
+      return {
+        ...state,
+        setUpCompanyProfile: null,
+        setUpCompanyProfileLoader: true,
+        setUpCompanyProfileError: null,
+      };
+    case SET_UP_COMPANY_PROFILE_SUCCESS:
+      debugger;
+      return {
+        ...state,
+        setUpCompanyProfile: action.payload,
+        setUpCompanyProfileLoader: false,
+        setUpCompanyProfileError: null,
+      };
+    case SET_UP_COMPANY_PROFILE_FAILURE:
+      debugger;
+      return {
+        ...state,
+        setUpCompanyProfile: null,
+        setUpCompanyProfileLoader: false,
+        setUpCompanyProfileError: action.error,
       };
 
     default:

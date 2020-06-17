@@ -7,12 +7,13 @@ const rootEpic = combineEpics(
   authEpic.login,
   authEpic.logout,
   authEpic.isLoggedIn,
-  authEpic.getUserById
+  authEpic.getUserById,
+  jobEpic.addJob,
+  jobEpic.setUpCompanyProfile,
+  jobEpic.setUpStudentProfile
   //   authEpic.getUsers,
-  // jobEpic.addJob,
   // jobEpic.getJob,
   // jobEpic.getJobs,
-  // jobEpic.setUpStudentProfile,
 );
 
 export default rootEpic;

@@ -1,19 +1,75 @@
-import { Observable } from "rxjs/Rx";
-import { categoryAction } from "../action/index";
 import {
-  ADD_JOB,
-  GET_JOB,
-  GET_JOBS,
+  // GET_JOB,
+  // GET_JOBS,
   SET_UP_STUDENT_PROFILE,
+  SET_UP_COMPANY_PROFILE,
+  ADD_JOB,
 } from "../constants";
-import clientConfig from "./../../config/firebaseClientConfig";
-import firebase from "firebase";
-import store from "../store.js";
-import { HttpService } from "../../services/http";
-import PATH from "./../../config/path";
+import { Observable } from "rxjs/Rx";
+import { jobAction } from "../action/index";
+import { db } from "../../config/firebaseClientConfig";
 
 export default class categoryEpic {
-  // static addCategory = (action$) =>
+  static setUpStudentProfile = (action$) =>
+    action$.ofType(SET_UP_STUDENT_PROFILE).switchMap(({ payload }) => {
+      debugger;
+      console.log(payload);
+      return Observable.fromPromise(
+        db.collection("student profiles").doc().set(payload)
+      )
+        .switchMap((response) => {
+          console.log(response);
+          debugger;
+          return Observable.of(jobAction.setUpStudentProfileSuccess(payload));
+        })
+        .catch((err) => {
+          debugger;
+          return jobAction.setUpStudentProfileFailure(
+            `Error in Save student data! ${err}`
+          );
+        });
+    });
+
+  static setUpCompanyProfile = (action$) =>
+    action$.ofType(SET_UP_COMPANY_PROFILE).switchMap(({ payload }) => {
+      debugger;
+      console.log(payload);
+      return Observable.fromPromise(
+        db.collection("company profiles").doc().set(payload)
+      )
+        .switchMap((response) => {
+          console.log(response);
+          debugger;
+          return Observable.of(jobAction.setUpCompanyProfileSuccess(payload));
+        })
+        .catch((err) => {
+          debugger;
+          return jobAction.setUpCompanyProfileFailure(
+            `Error in Save student data! ${err}`
+          );
+        });
+    });
+
+  static addJob = (action$) =>
+    action$.ofType(ADD_JOB).switchMap(({ payload }) => {
+      debugger;
+      console.log(payload);
+      return Observable.fromPromise(
+        db.collection("job descriptions").doc().set(payload)
+      )
+        .switchMap((response) => {
+          console.log(response);
+          debugger;
+          return Observable.of(jobAction.addJobSuccess(payload));
+        })
+        .catch((err) => {
+          debugger;
+          return jobAction.addJobFailure(
+            `Error in add job description! ${err}`
+          );
+        });
+    });
+  // static    = (action$) =>
   //   action$.ofType(ADD_JOB).switchMap(({ payload }) => {
   //     const {
   //       displayName,

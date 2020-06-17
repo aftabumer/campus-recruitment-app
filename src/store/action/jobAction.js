@@ -11,22 +11,28 @@ import {
   SET_UP_STUDENT_PROFILE,
   SET_UP_STUDENT_PROFILE_FAILURE,
   SET_UP_STUDENT_PROFILE_SUCCESS,
+  SET_UP_COMPANY_PROFILE,
+  SET_UP_COMPANY_PROFILE_FAILURE,
+  SET_UP_COMPANY_PROFILE_SUCCESS,
 } from "../constants";
 
 export class jobAction {
   static addJob(payload) {
+    debugger;
     return {
       type: ADD_JOB,
       payload,
     };
   }
   static addJobSuccess(payload) {
+    debugger;
     return {
       type: ADD_JOB_SUCCESS,
       payload,
     };
   }
   static addJobFailure(error) {
+    debugger;
     return {
       type: ADD_JOB_FAILURE,
       error,
@@ -72,20 +78,45 @@ export class jobAction {
   }
 
   static setUpStudentProfile(payload) {
+    debugger;
     return {
       type: SET_UP_STUDENT_PROFILE,
       payload,
     };
   }
   static setUpStudentProfileSuccess(payload) {
+    debugger;
     return {
       type: SET_UP_STUDENT_PROFILE_SUCCESS,
       payload,
     };
   }
   static setUpStudentProfileFailure(error) {
+    debugger;
     return {
       type: SET_UP_STUDENT_PROFILE_FAILURE,
+      error,
+    };
+  }
+
+  static setUpCompanyProfile(payload) {
+    debugger;
+    return {
+      type: SET_UP_COMPANY_PROFILE,
+      payload,
+    };
+  }
+  static setUpCompanyProfileSuccess(payload) {
+    debugger;
+    return {
+      type: SET_UP_COMPANY_PROFILE_SUCCESS,
+      payload,
+    };
+  }
+  static setUpCompanyProfileFailure(error) {
+    debugger;
+    return {
+      type: SET_UP_COMPANY_PROFILE_FAILURE,
       error,
     };
   }
