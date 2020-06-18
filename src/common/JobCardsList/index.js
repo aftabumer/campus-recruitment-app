@@ -1,18 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import JobDescriptionCard from "../JobDescriptionCard";
 import LayoutWrapper from "../LayoutWrapper";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { jobAction } from "../../store/action";
 
-const JobCardsList = () => {
+const JobCardsList = ({ getJobs, getJobsAction }) => {
+  // useEffect(() => {
+  //   debugger;
+  //   getJobsAction();
+  // }, [getJobsAction]);
+  console.log(getJobs && getJobs.data && getJobs.data.length);
   return (
     <LayoutWrapper>
       <div className="job-card-list-container">
-        {jobLists.map((jobList) => (
+        {/* {getJobs &&
+          getJobs.map((getJob) => (
+            <div className="job-card-list-section">
+              <JobDescriptionCard
+                jobTitle={getJob.jobTitle}
+                jobDescription={getJob.jobDescription}
+                jobExperiences={getJob.experiences}
+                jobRequriment={getJob.requriment}
+              />
+            </div>
+          ))} */}
+        {jobLists.map((getJob) => (
           <div className="job-card-list-section">
             <JobDescriptionCard
-              jobTitle={jobList.title}
-              jobDiscription={jobList.description}
-              jobIcon={jobList.jobIcon}
-              bgColor={jobList.bgColor}
+              jobTitle={getJob.title}
+              jobDescription={getJob.description}
             />
           </div>
         ))}
@@ -21,7 +38,30 @@ const JobCardsList = () => {
   );
 };
 
-export default JobCardsList;
+const mapStateToProps = (state) => {
+  const {
+    authReducer: { getUserByIdLoader, user },
+    jobReducer: { getJobs, getCompanyProfile },
+  } = state;
+
+  return {
+    getJobs,
+    getUserByIdLoader,
+    getCompanyProfile,
+    user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getJobsAction: (payload) => dispatch(jobAction.getJobs(payload)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(JobCardsList));
 
 const jobLists = [
   {

@@ -18,6 +18,7 @@ const TextField = ({
         type={type}
         disabled={disabled}
         placeholder={placeholder}
+        autoComplete={false}
       />
     </div>
   );

@@ -1,0 +1,12 @@
+.popover-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+
+  .title-class {
+    text-transform: uppercase;
+    color: map-get($theme-colors, primary-color);
+  }
+}

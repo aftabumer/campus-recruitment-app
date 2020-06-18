@@ -23,7 +23,7 @@ const LoginForm = ({ history, loginAction }) => {
     loginAction({
       email: email,
       password: password,
-      roll: selectRoll,
+      // roll: selectRoll,
     });
 
     history.push("/");
@@ -84,7 +84,7 @@ const LoginForm = ({ history, loginAction }) => {
             />
             <div className="login-btn-container">
               <Button
-                btnText="login in"
+                btnText="login"
                 primaryBtn
                 onClick={loginSubmitHandler}
               />

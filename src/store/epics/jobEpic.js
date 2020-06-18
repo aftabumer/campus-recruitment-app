@@ -3,7 +3,9 @@ import {
   // GET_JOBS,
   SET_UP_STUDENT_PROFILE,
   SET_UP_COMPANY_PROFILE,
+  GET_COMPANY_PROFILE,
   ADD_JOB,
+  GET_JOBS,
 } from "../constants";
 import { Observable } from "rxjs/Rx";
 import { jobAction } from "../action/index";
@@ -66,6 +68,36 @@ export default class categoryEpic {
           debugger;
           return jobAction.addJobFailure(
             `Error in add job description! ${err}`
+          );
+        });
+    });
+
+  static getCompanyProfile = (action$) =>
+    action$.ofType(GET_COMPANY_PROFILE).switchMap(({ payload }) => {
+      debugger;
+      const { id } = payload;
+      // var data = {};
+      return db
+        .collection("company profiles")
+        .doc(id)
+        .get()
+        .then((doc) => {
+          debugger;
+          if (doc.exists) {
+            debugger;
+            return jobAction.getCompanyProfileSuccess({
+              ...doc.data(),
+              vid: doc.id,
+            });
+          } else {
+            debugger;
+            return jobAction.getCompanyProfileFailure(`No such document!`);
+          }
+        })
+        .catch((error) => {
+          debugger;
+          return jobAction.getCompanyProfileFailure(
+            `Error in getting profile! ${error}`
           );
         });
     });
@@ -163,51 +195,27 @@ export default class categoryEpic {
   //         );
   //       });
   //   });
-  // static getCategories = (action$) =>
-  //   action$.ofType(GET_CATEGORIES).switchMap((_) => {
-  //     // const { catId, subCatId } = payload;
-  //     const data = [];
-  //     return Observable.fromPromise(
-  //       clientConfig.firestore().collection("categories").get()
-  //     )
-  //       .switchMap((querySnapshot) => {
-  //         let subCategoriescategoryImagesArr = [];
-  //         querySnapshot.forEach((doc) => {
-  //           // doc.data() is never undefined for query doc snapshots
-  //           // console.log(doc.id, " => ", doc.data());
-  //           data.push({ ...doc.data(), id: doc.id });
-  //           subCategoriescategoryImagesArr.push(
-  //             clientConfig
-  //               .firestore()
-  //               .collection("categories")
-  //               .doc(doc.id)
-  //               .collection("subCategories")
-  //               .get()
-  //           );
-  //         });
-  //         return Observable.fromPromise(
-  //           Promise.all(subCategoriescategoryImagesArr)
-  //         );
-  //       })
-  //       .switchMap((subQueryData) => {
-  //         subQueryData.map((subCategories, index) => {
-  //           data[index]["subCategories"] = [];
-  //           subCategories.forEach((item) => {
-  //             data[index]["subCategories"].push({
-  //               ...item.data(),
-  //               id: item.id,
-  //             });
-  //           });
-  //           return null;
-  //         });
-  //         return Observable.of(categoryAction.getCategoriesSuccess({ data }));
-  //       })
-  //       .catch((error) => {
-  //         return Observable.of(
-  //           categoryAction.getCategoriesFailure({
-  //             message: error.message,
-  //           })
-  //         );
-  //       });
-  //   });
+  static getJobs = (action$) =>
+    action$.ofType(GET_JOBS).switchMap((_) => {
+      debugger;
+      const data = [];
+      return Observable.fromPromise(db.collection("job descriptions").get())
+        .switchMap((querySnapshot) => {
+          debugger;
+          querySnapshot.forEach((doc) => {
+            console.log(doc);
+            debugger;
+            // console.log(doc.id, " => ", doc.data());
+            data.push({ ...doc.data(), id: doc.id });
+            console.log(data);
+          });
+          return Observable.of(jobAction.getJobsSuccess(data));
+        })
+        .catch((error) => {
+          debugger;
+          return Observable.of(
+            jobAction.getJobsFailure(`Error in getting jobs! ${error}`)
+          );
+        });
+    });
 }

@@ -20,10 +20,10 @@ const StudentProfileForm = ({
   const [experience, setexperience] = useState("");
   const [address, setaddress] = useState("");
 
-  useEffect(() => {
-    console.log(isLoggedInAction);
-    isLoggedInAction();
-  }, [isLoggedInAction]);
+  // useEffect(() => {
+  //   console.log(isLoggedInAction);
+  //   isLoggedInAction();
+  // }, [isLoggedInAction]);
 
   const profileSubmitHandler = () => {
     debugger;
@@ -40,97 +40,90 @@ const StudentProfileForm = ({
   };
 
   return (
-    <LayoutWrapper>
-      {console.log("user student: ", user)}
-      <div className="profile-form-container">
-        <div className="profile-form-left-sec">
-          <h1 className="profile-form-title m5">Student Profile Form</h1>
-          <div className="profile-form-fields">
-            <TextField
-              placeholder="first name"
-              className="profile-field"
-              textFieldClass="text-field"
-              type="text"
-              value={firstName}
-              onChange={(event) => {
-                setfirstName(event.target.value);
-              }}
-            />
-            <TextField
-              placeholder="last name"
-              className="profile-field"
-              textFieldClass="text-field"
-              type="text"
-              value={lastName}
-              onChange={(event) => {
-                setlastName(event.target.value);
-              }}
-            />
-            <TextField
-              placeholder="contact number"
-              className="profile-field"
-              textFieldClass="text-field"
-              type="number"
-              value={contactNumber}
-              onChange={(event) => {
-                setcontactNumber(event.target.value);
-              }}
-            />
-            <TextField
-              placeholder="email addresss"
-              className="profile-field"
-              textFieldClass="text-field"
-              type="email"
-              value={email}
-              onChange={(event) => {
-                setemail(event.target.value);
-              }}
-            />
-            <TextField
-              placeholder="qulification"
-              className="profile-field"
-              textFieldClass="text-field"
-              type="text"
-              value={qulification}
-              onChange={(event) => {
-                setqulification(event.target.value);
-              }}
-            />
-            <TextField
-              placeholder="experience"
-              className="profile-field"
-              textFieldClass="text-field"
-              type="text"
-              value={experience}
-              onChange={(event) => {
-                setexperience(event.target.value);
-              }}
-            />
-            <TextField
-              placeholder="address"
-              className="profile-field"
-              textFieldClass="text-field"
-              type="text"
-              value={address}
-              onChange={(event) => {
-                setaddress(event.target.value);
-              }}
-            />
-          </div>
-          <div className="profile-form-btn">
-            <Button
-              btnText="submit"
-              primaryBtn
-              onClick={profileSubmitHandler}
-            />
-          </div>
+    <div className="profile-form-container">
+      <div className="profile-form-left-sec">
+        <h1 className="profile-form-title m5">Student Profile Form</h1>
+        <div className="profile-form-fields">
+          <TextField
+            placeholder="first name"
+            className="profile-field"
+            textFieldClass="text-field"
+            type="text"
+            value={firstName}
+            onChange={(event) => {
+              setfirstName(event.target.value);
+            }}
+          />
+          <TextField
+            placeholder="last name"
+            className="profile-field"
+            textFieldClass="text-field"
+            type="text"
+            value={lastName}
+            onChange={(event) => {
+              setlastName(event.target.value);
+            }}
+          />
+          <TextField
+            placeholder="contact number"
+            className="profile-field"
+            textFieldClass="text-field"
+            type="number"
+            value={contactNumber}
+            onChange={(event) => {
+              setcontactNumber(event.target.value);
+            }}
+          />
+          <TextField
+            placeholder="email addresss"
+            className="profile-field"
+            textFieldClass="text-field"
+            type="email"
+            value={email}
+            onChange={(event) => {
+              setemail(event.target.value);
+            }}
+          />
+          <TextField
+            placeholder="qulification"
+            className="profile-field"
+            textFieldClass="text-field"
+            type="text"
+            value={qulification}
+            onChange={(event) => {
+              setqulification(event.target.value);
+            }}
+          />
+          <TextField
+            placeholder="experience"
+            className="profile-field"
+            textFieldClass="text-field"
+            type="text"
+            value={experience}
+            onChange={(event) => {
+              setexperience(event.target.value);
+            }}
+          />
+          <TextField
+            placeholder="address"
+            className="profile-field"
+            textFieldClass="text-field"
+            type="text"
+            value={address}
+            onChange={(event) => {
+              setaddress(event.target.value);
+            }}
+          />
         </div>
-
-        <div className="profile-form-right-sec">
-          <div className="profile-form-bg" />
+        <div className="profile-form-btn">
+          <Button btnText="submit" primaryBtn onClick={profileSubmitHandler} />
         </div>
       </div>
-    </LayoutWrapper>
+
+      <div className="profile-form-right-sec">
+        <div className="profile-form-bg" />
+      </div>
+    </div>
   );
 };
 

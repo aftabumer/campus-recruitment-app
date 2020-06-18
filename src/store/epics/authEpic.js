@@ -84,10 +84,13 @@ export default class authEpic {
 
   static login = (action$) =>
     action$.ofType(LOGIN).switchMap(({ payload }) => {
+      console.log(payload);
+      console.log(payload.email);
+      console.log(payload.password);
       debugger;
-      const { email, password } = payload;
+
       return Observable.fromPromise(
-        auth.signInWithEmailAndPassword(email, password)
+        auth.signInWithEmailAndPassword(payload.email, payload.password)
       )
         .switchMap((response) => {
           debugger;

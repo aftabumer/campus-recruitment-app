@@ -6,6 +6,7 @@ import LoginForm from "../common/LoginForm";
 import StudentProfileForm from "../common/Form/StudentProfileForm";
 import CompanyProfileForm from "../common/Form/CompanyProfileForm";
 import JobDescriptionForm from "../common/Form/JobDescriptionForm";
+import Dashboard from "../common/Dashbord";
 
 const Routes = ({ childProps }) => {
   return (
@@ -28,6 +29,7 @@ const Routes = ({ childProps }) => {
         component={JobDescriptionForm}
         props={childProps}
       />
+      <Route path="/dashboard" component={Dashboard} props={childProps} />
     </Switch>
   );
 };

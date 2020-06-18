@@ -7,6 +7,10 @@ const Button = ({
   signUp,
   primaryBtn,
   secondaryBtn,
+  tabBtn,
+  width,
+  margin,
+  className,
 }) => {
   const btnType = () => {
     if (login) {
@@ -17,10 +21,16 @@ const Button = ({
       return "primary-btn";
     } else if (secondaryBtn) {
       return "secondary-btn";
+    } else if (tabBtn) {
+      return "tab-btn";
     }
   };
   return (
-    <button className={btnType()} onClick={onClick}>
+    <button
+      style={{ width: width ? width : "auto", margin: margin ? margin : "0" }}
+      className={`${btnType()} ${className}`}
+      onClick={onClick}
+    >
       {btnText}
     </button>
   );

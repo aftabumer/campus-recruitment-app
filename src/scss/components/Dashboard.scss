@@ -1,0 +1,44 @@
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 1rem 0;
+  flex-direction: column;
+  background-color: map-get($theme-colors, primary-color);
+
+  .dashbord-title {
+    text-decoration: underline;
+    text-transform: uppercase;
+    color: map-get($theme-colors, text-color);
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .dashbord-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 99%;
+  }
+}
+
+.active-tab {
+  background-color: map-get($theme-colors, dark-orange-color);
+  color: map-get($theme-colors, primary-color);
+  font-size: 18px;
+}
+
+
+.companydashbord-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+}

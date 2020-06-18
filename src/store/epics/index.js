@@ -10,10 +10,10 @@ const rootEpic = combineEpics(
   authEpic.getUserById,
   jobEpic.addJob,
   jobEpic.setUpCompanyProfile,
-  jobEpic.setUpStudentProfile
-  //   authEpic.getUsers,
+  jobEpic.setUpStudentProfile,
+  jobEpic.getCompanyProfile,
   // jobEpic.getJob,
-  // jobEpic.getJobs,
+  jobEpic.getJobs,
 );
 
 export default rootEpic;

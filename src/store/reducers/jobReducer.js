@@ -14,6 +14,9 @@ import {
   SET_UP_COMPANY_PROFILE,
   SET_UP_COMPANY_PROFILE_FAILURE,
   SET_UP_COMPANY_PROFILE_SUCCESS,
+  GET_COMPANY_PROFILE,
+  GET_COMPANY_PROFILE_SUCCESS,
+  GET_COMPANY_PROFILE_FAILURE,
 } from "../constants";
 
 const initialState = {
@@ -32,6 +35,14 @@ const initialState = {
   setUpStudentProfile: null,
   setUpStudentProfileLoader: false,
   setUpStudentProfileError: null,
+
+  getCompanyProfile: null,
+  getCompanyProfileLoader: false,
+  getCompanyProfileError: null,
+
+  setUpCompanyProfile: null,
+  setUpCompanyProfileLoader: false,
+  setUpCompanyProfileError: null,
 };
 
 export default function jobReducer(state = initialState, action) {
@@ -87,6 +98,7 @@ export default function jobReducer(state = initialState, action) {
 
     //////////////////////////GET_JOBS/////////////////////////
     case GET_JOBS:
+      debugger;
       return {
         ...state,
         getJobs: null,
@@ -94,6 +106,8 @@ export default function jobReducer(state = initialState, action) {
         getJobsError: null,
       };
     case GET_JOBS_SUCCESS:
+      debugger;
+      console.log(action.payload);
       return {
         ...state,
         getJobs: action.payload,
@@ -101,6 +115,7 @@ export default function jobReducer(state = initialState, action) {
         getJobsError: null,
       };
     case GET_JOBS_FAILURE:
+      debugger;
       return {
         ...state,
         getJobs: null,
@@ -133,6 +148,32 @@ export default function jobReducer(state = initialState, action) {
         setUpStudentProfile: null,
         setUpStudentProfileLoader: false,
         setUpStudentProfileError: action.error,
+      };
+
+    ////////////////////////// GET_COMPANY_PROFILE /////////////////////////
+    case GET_COMPANY_PROFILE:
+      debugger;
+      return {
+        ...state,
+        getCompanyProfile: null,
+        getCompanyProfileLoader: true,
+        getCompanyProfileError: null,
+      };
+    case GET_COMPANY_PROFILE_SUCCESS:
+      debugger;
+      return {
+        ...state,
+        getCompanyProfile: action.payload,
+        getCompanyProfileLoader: false,
+        getCompanyProfileError: null,
+      };
+    case GET_COMPANY_PROFILE_FAILURE:
+      debugger;
+      return {
+        ...state,
+        getCompanyProfile: null,
+        getCompanyProfileLoader: false,
+        getCompanyProfileError: action.error,
       };
 
     //////////////////////////SET_UP_COMPANY_PROFILE/////////////////////////

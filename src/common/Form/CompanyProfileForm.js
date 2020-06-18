@@ -18,10 +18,10 @@ const CompanyProfileForm = ({
   const [contactNumber, setcontactNumber] = useState("");
   const [address, setaddress] = useState("");
 
-  useEffect(() => {
-    console.log(isLoggedInAction);
-    isLoggedInAction();
-  }, [isLoggedInAction]);
+  // useEffect(() => {
+  //   console.log(isLoggedInAction);
+  //   isLoggedInAction();
+  // }, [isLoggedInAction]);
 
   const profileSubmitHandler = () => {
     debugger;
@@ -36,76 +36,70 @@ const CompanyProfileForm = ({
   };
 
   return (
-    <LayoutWrapper>
-      <div className="profile-form-container">
-        <div className="profile-form-left-sec">
-          <h1 className="profile-form-title m5">Company Profile Form</h1>
-          <div className="profile-form-fields">
-            <TextField
-              placeholder="company name"
-              className="profile-field"
-              textFieldClass="text-field"
-              type="text"
-              value={companyName}
-              onChange={(event) => {
-                setcompanyName(event.target.value);
-              }}
-            />
-            <TextField
-              placeholder="email address"
-              className="profile-field"
-              textFieldClass="text-field"
-              type="text"
-              value={email}
-              onChange={(event) => {
-                setemail(event.target.value);
-              }}
-            />
-            <TextField
-              placeholder="website"
-              className="profile-field"
-              textFieldClass="text-field"
-              type="text"
-              value={website}
-              onChange={(event) => {
-                setwebsite(event.target.value);
-              }}
-            />
-            <TextField
-              placeholder="contact number"
-              className="profile-field"
-              textFieldClass="text-field"
-              type="number"
-              value={contactNumber}
-              onChange={(event) => {
-                setcontactNumber(event.target.value);
-              }}
-            />
-            <TextField
-              placeholder="adrees"
-              className="profile-field"
-              textFieldClass="text-field"
-              type="text"
-              value={address}
-              onChange={(event) => {
-                setaddress(event.target.value);
-              }}
-            />
-          </div>
-          <div className="profile-form-btn">
-            <Button
-              btnText="submit"
-              primaryBtn
-              onClick={profileSubmitHandler}
-            />
-          </div>
+    <div className="profile-form-container">
+      <div className="profile-form-left-sec">
+        <h1 className="profile-form-title m5">Company Profile Form</h1>
+        <div className="profile-form-fields">
+          <TextField
+            placeholder="company name"
+            className="profile-field"
+            textFieldClass="text-field"
+            type="text"
+            value={companyName}
+            onChange={(event) => {
+              setcompanyName(event.target.value);
+            }}
+          />
+          <TextField
+            placeholder="email address"
+            className="profile-field"
+            textFieldClass="text-field"
+            type="text"
+            value={email}
+            onChange={(event) => {
+              setemail(event.target.value);
+            }}
+          />
+          <TextField
+            placeholder="website"
+            className="profile-field"
+            textFieldClass="text-field"
+            type="text"
+            value={website}
+            onChange={(event) => {
+              setwebsite(event.target.value);
+            }}
+          />
+          <TextField
+            placeholder="contact number"
+            className="profile-field"
+            textFieldClass="text-field"
+            type="number"
+            value={contactNumber}
+            onChange={(event) => {
+              setcontactNumber(event.target.value);
+            }}
+          />
+          <TextField
+            placeholder="adrees"
+            className="profile-field"
+            textFieldClass="text-field"
+            type="text"
+            value={address}
+            onChange={(event) => {
+              setaddress(event.target.value);
+            }}
+          />
         </div>
-
-        <div className="profile-form-right-sec">
-          <div className="profile-form-bg" />
+        <div className="profile-form-btn">
+          <Button btnText="submit" primaryBtn onClick={profileSubmitHandler} />
         </div>
       </div>
-    </LayoutWrapper>
+
+      <div className="profile-form-right-sec">
+        <div className="profile-form-bg" />
+      </div>
+    </div>
   );
 };
 

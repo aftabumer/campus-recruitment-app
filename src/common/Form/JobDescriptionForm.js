@@ -17,10 +17,10 @@ const JobDescriptionForm = ({
   const [experiences, setexperiences] = useState("");
   const [requriment, setrequriment] = useState("");
 
-  useEffect(() => {
-    console.log(isLoggedInAction);
-    isLoggedInAction();
-  }, [isLoggedInAction]);
+  // useEffect(() => {
+  //   console.log(isLoggedInAction);
+  //   isLoggedInAction();
+  // }, [isLoggedInAction]);
 
   const jobSubmitHandler = () => {
     debugger;
@@ -34,7 +34,6 @@ const JobDescriptionForm = ({
   };
 
   return (
-    <LayoutWrapper>
       <div className="profile-form-container">
         <div className="profile-form-left-sec">
           <h1 className="profile-form-title m5">Job Description Form</h1>
@@ -89,7 +88,6 @@ const JobDescriptionForm = ({
           <div className="profile-form-bg" />
         </div>
       </div>
-    </LayoutWrapper>
   );
 };
 
