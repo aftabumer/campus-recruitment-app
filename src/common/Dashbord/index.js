@@ -17,8 +17,8 @@ const Dashboard = ({ user, getUserByIdLoader, isLoggedInAction }) => {
   const [viewJobs, setviewJobs] = useState(false);
 
   const [viewCompanyProfiles, setviewCompanyProfiles] = useState(false);
-  const [viewStudentProfiles, setviewStudentProfiles] = useState(true);
-  const [viewAllJobs, setviewAllJobs] = useState(false);
+  const [viewStudentProfiles, setviewStudentProfiles] = useState(false);
+  const [viewAllJobs, setviewAllJobs] = useState(true);
 
   return (
     <LayoutWrapper>

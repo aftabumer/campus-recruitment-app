@@ -1,0 +1,69 @@
+.job-list-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  flex-wrap: wrap;
+
+  .job-lists {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 45%;
+  }
+}
+
+.job-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 90px;
+  background-color: map-get($theme-colors, text-color);
+
+  .job-card-top-sec {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .job-card-tittle {
+      text-transform: uppercase;
+      font-size: 24px;
+      color: map-get($theme-colors, primary-color);
+    }
+    .job-card-description {
+      font-size: 18px;
+      color: map-get($theme-colors, secondary-color);
+      height: 3rem;
+      overflow: hidden;
+    }
+  }
+
+  .job-card-bottom-sec {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .job-card-requriment,
+    .job-card-experience {
+      text-decoration: underline;
+      font-size: 18px;
+      font-family: Gilroy-Bold;
+      color: map-get($theme-colors, dark-orange-color);
+    }
+
+    .job-card-requriment{
+        width: 70%;
+        overflow: hidden;
+    }
+
+    .break-line {
+      border: 1px solid map-get($theme-colors, primary-color);
+      height: 14px;
+    }
+  }
+}

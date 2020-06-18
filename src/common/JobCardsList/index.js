@@ -6,15 +6,15 @@ import { connect } from "react-redux";
 import { jobAction } from "../../store/action";
 
 const JobCardsList = ({ getJobs, getJobsAction }) => {
-  // useEffect(() => {
-  //   debugger;
-  //   getJobsAction();
-  // }, [getJobsAction]);
+  useEffect(() => {
+    debugger;
+    getJobsAction();
+  }, [getJobsAction]);
   console.log(getJobs && getJobs.data && getJobs.data.length);
   return (
     <LayoutWrapper>
       <div className="job-card-list-container">
-        {/* {getJobs &&
+        {getJobs &&
           getJobs.map((getJob) => (
             <div className="job-card-list-section">
               <JobDescriptionCard
@@ -24,15 +24,15 @@ const JobCardsList = ({ getJobs, getJobsAction }) => {
                 jobRequriment={getJob.requriment}
               />
             </div>
-          ))} */}
-        {jobLists.map((getJob) => (
+          ))}
+        {/* {jobLists.map((getJob) => (
           <div className="job-card-list-section">
             <JobDescriptionCard
               jobTitle={getJob.title}
               jobDescription={getJob.description}
             />
           </div>
-        ))}
+        ))} */}
       </div>
     </LayoutWrapper>
   );
