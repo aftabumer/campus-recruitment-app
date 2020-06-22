@@ -17,6 +17,12 @@ import {
   GET_COMPANY_PROFILE,
   GET_COMPANY_PROFILE_SUCCESS,
   GET_COMPANY_PROFILE_FAILURE,
+  GET_COMPANY_PROFILES,
+  GET_COMPANY_PROFILES_SUCCESS,
+  GET_COMPANY_PROFILES_FAILURE,
+  GET_STUDENT_PROFILES,
+  GET_STUDENT_PROFILES_SUCCESS,
+  GET_STUDENT_PROFILES_FAILURE,
 } from "../constants";
 
 export class jobAction {
@@ -128,7 +134,7 @@ export class jobAction {
     };
   }
 
-  static getCompanyProfile(payload) {
+  static  (payload) {
     debugger;
     return {
       type: GET_COMPANY_PROFILE,
@@ -146,6 +152,50 @@ export class jobAction {
     debugger;
     return {
       type: GET_COMPANY_PROFILE_FAILURE,
+      error,
+    };
+  }
+
+  static getCompanyProfiles(payload) {
+    debugger;
+    return {
+      type: GET_COMPANY_PROFILES,
+      payload,
+    };
+  }
+  static getCompanyProfilesSuccess(payload) {
+    debugger;
+    return {
+      type: GET_COMPANY_PROFILES_SUCCESS,
+      payload,
+    };
+  }
+  static getCompanyProfilesFailure(error) {
+    debugger;
+    return {
+      type: GET_COMPANY_PROFILES_FAILURE,
+      error,
+    };
+  }
+
+  static getStudentProfiles(payload) {
+    debugger;
+    return {
+      type: GET_STUDENT_PROFILES,
+      payload,
+    };
+  }
+  static getStudentProfilesSuccess(payload) {
+    debugger;
+    return {
+      type: GET_STUDENT_PROFILES_SUCCESS,
+      payload,
+    };
+  }
+  static getStudentProfilesFailure(error) {
+    debugger;
+    return {
+      type: GET_STUDENT_PROFILES_FAILURE,
       error,
     };
   }

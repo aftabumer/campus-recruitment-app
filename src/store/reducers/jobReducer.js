@@ -17,6 +17,12 @@ import {
   GET_COMPANY_PROFILE,
   GET_COMPANY_PROFILE_SUCCESS,
   GET_COMPANY_PROFILE_FAILURE,
+  GET_COMPANY_PROFILES,
+  GET_COMPANY_PROFILES_SUCCESS,
+  GET_COMPANY_PROFILES_FAILURE,
+  GET_STUDENT_PROFILES,
+  GET_STUDENT_PROFILES_SUCCESS,
+  GET_STUDENT_PROFILES_FAILURE,
 } from "../constants";
 
 const initialState = {
@@ -43,6 +49,14 @@ const initialState = {
   setUpCompanyProfile: null,
   setUpCompanyProfileLoader: false,
   setUpCompanyProfileError: null,
+
+  getCompanyProfiles: null,
+  getCompanyProfilesLoader: false,
+  getCompanyProfilesError: null,
+
+  getStudentProfiles: null,
+  getStudentProfilesLoader: false,
+  getStudentProfilesError: null,
 };
 
 export default function jobReducer(state = initialState, action) {
@@ -201,6 +215,56 @@ export default function jobReducer(state = initialState, action) {
         setUpCompanyProfile: null,
         setUpCompanyProfileLoader: false,
         setUpCompanyProfileError: action.error,
+      };
+
+    case GET_COMPANY_PROFILES:
+      debugger;
+      return {
+        ...state,
+        getCompanyProfiles: null,
+        getCompanyProfilesLoader: true,
+        getCompanyProfilesError: null,
+      };
+    case GET_COMPANY_PROFILES_SUCCESS:
+      debugger;
+      return {
+        ...state,
+        getCompanyProfiles: action.payload,
+        getCompanyProfilesLoader: false,
+        getCompanyProfilesError: null,
+      };
+    case GET_COMPANY_PROFILES_FAILURE:
+      debugger;
+      return {
+        ...state,
+        getCompanyProfiles: null,
+        getCompanyProfilesLoader: false,
+        getCompanyProfilesError: action.error,
+      };
+
+    case GET_STUDENT_PROFILES:
+      debugger;
+      return {
+        ...state,
+        getStudentProfiles: null,
+        getStudentProfilesLoader: true,
+        getStudentProfilesError: null,
+      };
+    case GET_STUDENT_PROFILES_SUCCESS:
+      debugger;
+      return {
+        ...state,
+        getStudentProfiles: action.payload,
+        getStudentProfilesLoader: false,
+        getStudentProfilesError: null,
+      };
+    case GET_STUDENT_PROFILES_FAILURE:
+      debugger;
+      return {
+        ...state,
+        getStudentProfiles: null,
+        getStudentProfilesLoader: false,
+        getStudentProfilesError: action.error,
       };
 
     default:

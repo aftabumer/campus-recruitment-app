@@ -1,11 +1,51 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { jobAction } from "../../../store/action";
+import CompanyCard from "./CompanyCard";
 
-const CampanyLists = () => {
-    return (
-        <div>
-            <h1>companies list</h1>
-        </div>
-    )
-}
+const CampanyLists = ({
+  getCompanyProfileAction,
+  getCompanyProfiles,
+  getCompanyProfilesLoader,
+}) => {
+  useEffect(() => {
+    debugger;
+    getCompanyProfileAction();
+  }, [getCompanyProfileAction]);
 
-export default CampanyLists
+  return (
+    <div className="job-list-container">
+      {getCompanyProfilesLoader && "loading"}
+      {getCompanyProfiles &&
+        getCompanyProfiles.map((getCompanyProfile) => (
+          <div className="job-lists mb5">
+            <CompanyCard getCompanyProfile={getCompanyProfile} />
+          </div>
+        ))}
+    </div>
+  );
+};
+
+const mapStateToProps = (state) => {
+  const {
+    jobReducer: { getCompanyProfiles, getCompanyProfilesLoader },
+  } = state;
+
+  return {
+    getCompanyProfiles,
+    getCompanyProfilesLoader,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCompanyProfileAction: (payload) =>
+      dispatch(jobAction.getCompanyProfiles(payload)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(CampanyLists));

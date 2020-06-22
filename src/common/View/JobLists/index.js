@@ -4,37 +4,39 @@ import { connect } from "react-redux";
 import { jobAction } from "../../../store/action";
 import { withRouter } from "react-router-dom";
 
-const JobLists = ({ getJobs, getJobsAction }) => {
+const JobLists = ({ getJobs, getJobsAction, getJobsLoader }) => {
   useEffect(() => {
     debugger;
     getJobsAction();
   }, [getJobsAction]);
 
   return (
-      <div className="job-list-container">
-        {getJobs &&
-          getJobs.map((getJob) => (
-            <div className="job-lists mb5">
-              <JobCard
-                title={getJob.jobTitle}
-                description={getJob.jobDescription}
-                experience={getJob.experiences}
-                requriments={getJob.requriment}
-              />
-            </div>
-          ))}
-      </div>
+    <div className="job-list-container">
+      {getJobsLoader && "loading"}
+      {getJobs &&
+        getJobs.map((getJob) => (
+          <div className="job-lists mb5">
+            <JobCard
+              title={getJob.jobTitle}
+              description={getJob.jobDescription}
+              experience={getJob.experiences}
+              requriments={getJob.requriment}
+            />
+          </div>
+        ))}
+    </div>
   );
 };
 
 const mapStateToProps = (state) => {
   const {
     authReducer: { getUserByIdLoader, user },
-    jobReducer: { getJobs, getCompanyProfile },
+    jobReducer: { getJobs, getJobsLoader, getCompanyProfile },
   } = state;
 
   return {
     getJobs,
+    getJobsLoader,
     getUserByIdLoader,
     getCompanyProfile,
     user,

@@ -6,6 +6,8 @@ import {
   GET_COMPANY_PROFILE,
   ADD_JOB,
   GET_JOBS,
+  GET_COMPANY_PROFILES,
+  GET_STUDENT_PROFILES,
 } from "../constants";
 import { Observable } from "rxjs/Rx";
 import { jobAction } from "../action/index";
@@ -101,6 +103,106 @@ export default class categoryEpic {
           );
         });
     });
+
+  static getCompanyProfiles = (action$) =>
+    action$.ofType(GET_COMPANY_PROFILES).switchMap((_) => {
+      debugger;
+      const data = [];
+      return Observable.fromPromise(db.collection("company profiles").get())
+        .switchMap((querySnapshot) => {
+          debugger;
+          querySnapshot.forEach((doc) => {
+            console.log(doc);
+            debugger;
+            // console.log(doc.id, " => ", doc.data());
+            data.push({ ...doc.data(), id: doc.id });
+            console.log(data);
+          });
+          return Observable.of(jobAction.getCompanyProfilesSuccess(data));
+        })
+        .catch((error) => {
+          debugger;
+          return Observable.of(
+            jobAction.getCompanyProfilesFailure(
+              `Error in getting compaies profiles! ${error}`
+            )
+          );
+        });
+    });
+
+  static getStudentProfiles = (action$) =>
+    action$.ofType(GET_STUDENT_PROFILES).switchMap((_) => {
+      debugger;
+      const data = [];
+      return Observable.fromPromise(db.collection("student profiles").get())
+        .switchMap((querySnapshot) => {
+          debugger;
+          querySnapshot.forEach((doc) => {
+            console.log(doc);
+            debugger;
+            // console.log(doc.id, " => ", doc.data());
+            data.push({ ...doc.data(), id: doc.id });
+            console.log(data);
+          });
+          return Observable.of(jobAction.getStudentProfilesSuccess(data));
+        })
+        .catch((error) => {
+          debugger;
+          return Observable.of(
+            jobAction.getStudentProfilesFailure(
+              `Error in getting compaies profiles! ${error}`
+            )
+          );
+        });
+    });
+
+  static getJobs = (action$) =>
+    action$.ofType(GET_JOBS).switchMap((_) => {
+      debugger;
+      const data = [];
+      return Observable.fromPromise(db.collection("job descriptions").get())
+        .switchMap((querySnapshot) => {
+          debugger;
+          querySnapshot.forEach((doc) => {
+            console.log(doc);
+            debugger;
+            // console.log(doc.id, " => ", doc.data());
+            data.push({ ...doc.data(), id: doc.id });
+            console.log(data);
+          });
+          return Observable.of(jobAction.getJobsSuccess(data));
+        })
+        .catch((error) => {
+          debugger;
+          return Observable.of(
+            jobAction.getJobsFailure(`Error in getting jobs! ${error}`)
+          );
+        });
+    });
+  // static getJobs = (action$) =>
+  //   action$.ofType(GET_JOBS).switchMap((_) => {
+  //     debugger;
+  //     const data = [];
+  //     return Observable.fromPromise(db.collection("job descriptions").get())
+  //       .switchMap((querySnapshot) => {
+  //         debugger;
+  //         querySnapshot.forEach((doc) => {
+  //           console.log(doc);
+  //           debugger;
+  //           // console.log(doc.id, " => ", doc.data());
+  //           data.push({ ...doc.data(), id: doc.id });
+  //           console.log(data);
+  //         });
+  //         return Observable.of(jobAction.getJobsSuccess(data));
+  //       })
+  //       .catch((error) => {
+  //         debugger;
+  //         return Observable.of(
+  //           jobAction.getJobsFailure(`Error in getting jobs! ${error}`)
+  //         );
+  //       });
+  //   });
+
   // static    = (action$) =>
   //   action$.ofType(ADD_JOB).switchMap(({ payload }) => {
   //     const {
@@ -195,27 +297,4 @@ export default class categoryEpic {
   //         );
   //       });
   //   });
-  static getJobs = (action$) =>
-    action$.ofType(GET_JOBS).switchMap((_) => {
-      debugger;
-      const data = [];
-      return Observable.fromPromise(db.collection("job descriptions").get())
-        .switchMap((querySnapshot) => {
-          debugger;
-          querySnapshot.forEach((doc) => {
-            console.log(doc);
-            debugger;
-            // console.log(doc.id, " => ", doc.data());
-            data.push({ ...doc.data(), id: doc.id });
-            console.log(data);
-          });
-          return Observable.of(jobAction.getJobsSuccess(data));
-        })
-        .catch((error) => {
-          debugger;
-          return Observable.of(
-            jobAction.getJobsFailure(`Error in getting jobs! ${error}`)
-          );
-        });
-    });
 }

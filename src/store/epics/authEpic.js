@@ -19,26 +19,32 @@ export default class authEpic {
         auth.createUserWithEmailAndPassword(payload.email, payload.password)
       )
         .switchMap((response) => {
+          debugger;
           payload["uid"] = response.user.uid;
-          response.user.updateProfile({
-            displayName: payload.firstName + " " + payload.lastName,
-          });
+          console.log(response);
+
+          // response.user.updateProfile({
+          //   displayName: payload.firstName + " " + payload.lastName,
+          // });
           if (response.type && response.type === "SIGNUP_FAILURE") {
+            debugger;
+            console.log(response);
             return Observable.of(authAction.signupFailure(response.error));
           } else {
+            debugger;
             return Observable.fromPromise(
               db.collection("users").doc(response.user.uid).set(payload)
             );
           }
         })
         .switchMap((response) => {
+          debugger;
           console.log(response);
           return Observable.of(authAction.signupSuccess(payload));
         })
         .catch((err) => {
-          return Observable.of(
-            authAction.signupFailure({ error: err.message })
-          );
+          debugger;
+          return Observable.of(authAction.loginFailure({ error: err.message }));
         });
     });
 
@@ -50,6 +56,7 @@ export default class authEpic {
         )
       )
         .switchMap((response) => {
+          console.log(response);
           if (response.type && response.type === "IS_LOGGED_IN_FAILURE") {
             return Observable.of(authAction.isLoggedInFailure(response));
           } else {
@@ -93,6 +100,7 @@ export default class authEpic {
         auth.signInWithEmailAndPassword(payload.email, payload.password)
       )
         .switchMap((response) => {
+          console.log(response);
           debugger;
           if (response.type && response.type === "LOGIN_FAILURE") {
             return Observable.of(authAction.loginFailure(response.error));
