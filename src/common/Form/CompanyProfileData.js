@@ -12,14 +12,14 @@ const CompanyProfileData = ({
   getJobsAction,
   getJobs,
 }) => {
-  useEffect(() => {
-    debugger;
-    const profileId = user && user.id;
-    debugger;
-    if (profileId) {
-      getCompanyProfileAction({ id: profileId });
-    }
-  }, [getCompanyProfileAction]);
+  // useEffect(() => {
+  //   debugger;
+  //   const profileId = user && user.id;
+  //   debugger;
+  //   if (profileId) {
+  //     getCompanyProfileAction({ id: profileId });
+  //   }
+  // }, [getCompanyProfileAction]);
 
   // useEffect(() => {
   //   debugger;
@@ -50,9 +50,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCompanyProfileAction: (payload) =>
-      dispatch(jobAction.getCompanyProfile(payload)),
-    getJobsAction: (payload) => dispatch(jobAction.getJobs(payload)),
+    // getCompanyProfileAction: (payload) =>
+    //   dispatch(jobAction.getCompanyProfile(payload)),
+    // getJobsAction: (payload) => dispatch(jobAction.getJobs(payload)),
   };
 };
 

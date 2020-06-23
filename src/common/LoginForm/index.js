@@ -33,37 +33,38 @@ const LoginForm = ({ history, loginAction }) => {
     <LayoutWrapper>
       <div className="login-form-container">
         <div className="login-form-left-sec">
-          <ImageText
-            tilte={loginAs[0].title}
-            icon={loginAs[0].icon}
-            onClick={() => {
-              setSelectRoll("admin");
-            }}
-            className={selectRoll === "admin" && "active-roll"}
-          />
-          <ImageText
-            tilte={loginAs[1].title}
-            icon={loginAs[1].icon}
-            onClick={() => {
-              setSelectRoll("campany");
-            }}
-            className={selectRoll === "campany" && "active-roll"}
-          />
-          <ImageText
-            tilte={loginAs[2].title}
-            icon={loginAs[2].icon}
-            onClick={() => {
-              setSelectRoll("student");
-            }}
-            className={selectRoll === "student" && "active-roll"}
-          />
+          {/* <ImageText
+              tilte={loginAs[0].title}
+              icon={loginAs[0].icon}
+              onClick={() => {
+                setSelectRoll("admin");
+              }}
+              className={selectRoll === "admin" && "active-roll"}
+            />
+            <ImageText
+              tilte={loginAs[1].title}
+              icon={loginAs[1].icon}
+              onClick={() => {
+                setSelectRoll("campany");
+              }}
+              className={selectRoll === "campany" && "active-roll"}
+            />
+            <ImageText
+              tilte={loginAs[2].title}
+              icon={loginAs[2].icon}
+              onClick={() => {
+                setSelectRoll("student");
+              }}
+              className={selectRoll === "student" && "active-roll"}
+            /> */}
           {/* {loginAs.map((item) => (
             <ImageText tilte={item.title} icon={item.icon} />
           ))} */}
         </div>
         <div className="login-form-right-sec">
           <div className="login-form-content">
-            <p className="login-form-text">login as {selectRoll}</p>
+            <p className="login-form-text">login</p>
+            {/* <p className="login-form-text">login as {selectRoll}</p> */}
             <TextField
               placeholder="email"
               type="email"
@@ -83,11 +84,7 @@ const LoginForm = ({ history, loginAction }) => {
               }}
             />
             <div className="login-btn-container">
-              <Button
-                btnText="login"
-                primaryBtn
-                onClick={loginSubmitHandler}
-              />
+              <Button btnText="login" primaryBtn onClick={loginSubmitHandler} />
             </div>
           </div>
         </div>

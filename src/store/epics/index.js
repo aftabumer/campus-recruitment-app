@@ -11,7 +11,7 @@ const rootEpic = combineEpics(
   jobEpic.addJob,
   jobEpic.setUpCompanyProfile,
   jobEpic.setUpStudentProfile,
-  jobEpic.getCompanyProfile,
+  // jobEpic.getCompanyProfile,com
   jobEpic.getCompanyProfiles,
   jobEpic.getStudentProfiles,
   jobEpic.getJobs
